@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${titulo}"></title>
+</head>
+<body>
+    <h3 th:text="${titulo}"></h3>
+
+    <form th:action="@{/register}" method="post" th:object="${usuario}">
+        <div>
+            <label for="username">Username</label>
+            <div>
+                <input type="text" id="username" th:field="*{username}">
+            </div>
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <div>
+                <input type="password" id="password" th:field="*{password}">
+            </div>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <div>
+                <input type="text" id="email" th:field="*{email}">
+            </div>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        </div>
+
+        <div>
+            <input type="submit" value="Crear Usuario">
+        </div>
+    </form>
+
+    <div>
+        <a th:href="@{/login}"><input type="button" value="Login"></a>
+    </div>
+</body>
+</html>
