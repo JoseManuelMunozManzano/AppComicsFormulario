@@ -1,18 +1,20 @@
 package com.jmunoz.comicsform.AppComicsFormulario.models.domain;
 
+import java.util.Date;
+
 public class Comic {
-    private Integer id;
+    private Long id;
     private String nombre;
-    private String precio;
-    private String fechaRegistro;
+    private Float precio;
+    private Date fechaRegistro;
     private Tematica tematica;
     private Usuario usuario;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -24,19 +26,19 @@ public class Comic {
         this.nombre = nombre;
     }
 
-    public String getPrecio() {
+    public Float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(Float precio) {
         this.precio = precio;
     }
 
-    public String getFechaRegistro() {
+    public Date getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
+    public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

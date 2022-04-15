@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class Usuario {
-    private Integer id;
+    private Long id;
     @NotBlank
     @Size(min=3, max=12)
     private String username;
@@ -17,11 +17,11 @@ public class Usuario {
     @Email
     private String email;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getUsername() {

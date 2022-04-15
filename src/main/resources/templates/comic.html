@@ -10,11 +10,11 @@
 <body>
     <h1 th:text="${titulo}"></h1>
 
-<!--    <ul>-->
-<!--        <li th:text="${comic.nombre}"></li>-->
-<!--        <li th:text="${comic.precio}"></li>-->
-<!--        <li th:text="${comic.fechaRegistro}"></li>-->
-<!--        <li th:text="${comic.tematica}"></li>-->
-<!--    </ul>-->
+    <ul th:each="comic : ${comics}">
+        <li th:text="${comic.nombre}"></li>
+        <li th:text="${comic.precio}"></li>
+        <li th:text="${comic.fechaRegistro}"></li>
+        <li th:text="${comic.tematica.getNombre()}"></li>
+    </ul>
 </body>
 </html>

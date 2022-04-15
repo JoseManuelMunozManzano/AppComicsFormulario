@@ -5,3 +5,5 @@ También hecho con SpringBoot y Thymeleaf
 Interesado sobre todo en la parte de creación de formularios y grabación en la BBDD.
 
 Todavía sin aplicar Hibernate.
+
+El uso del password no es recomendado. Esto es solo una práctica.
