@@ -17,13 +17,16 @@ public class TematicaServiceImpl implements TematicaService {
 
     @Override
     public List<Tematica> getTematicas() throws SQLException {
-
         return repository.findAll();
     }
 
     @Override
-    public Tematica findComicsByTematica(Long id) throws SQLException {
+    public Tematica findTematicaById(Long id) throws SQLException {
+        return repository.findById(id);
+    }
 
+    @Override
+    public Tematica findComicsByTematica(Long id) throws SQLException {
         return repository.findById(id);
     }
 
@@ -31,6 +34,11 @@ public class TematicaServiceImpl implements TematicaService {
     public Tematica saveTematica(Tematica tematica) throws SQLException {
 
         return repository.save(tematica);
+    }
+
+    @Override
+    public Tematica updateTematica(Tematica tematica) throws SQLException {
+        return repository.update(tematica);
     }
 
     @Override

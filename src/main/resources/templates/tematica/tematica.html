@@ -9,5 +9,20 @@
 </head>
 <body>
     <h1 th:text="${titulo}"></h1>
+
+    <div>
+        <a th:href="@{/comic}"><input type="button" value="Volver"></a>
+        <a th:href="@{/tematica/alta}"><input type="button" value="Alta de Temática"></a>
+    </div>
+
+    <ul>
+        <li>Nombre</li>
+    </ul>
+    <ul th:each="tematica : ${tematicas}">
+        <li th:text="${tematica.getNombre()}"></li>
+        <li><a th:href="@{/tematica/editar/} + ${tematica.getId()}"><input type="button" value="Editar"></a></li>
+        <li><a th:href="@{/tematica/borrar/} + ${tematica.getId()}"><input type="button" value="Eliminar"></a></li>
+    </ul>
+
 </body>
 </html>

@@ -36,21 +36,21 @@ public class ComicController {
         return "comic/comic";
     }
 
-    @GetMapping("alta")
+    @GetMapping("/alta")
     public String alta(Model model) {
         model.addAttribute("titulo", "Alta de Comic");
 
         return "comic/alta";
     }
 
-    @GetMapping("editar")
+    @GetMapping("/editar")
     public String editar(Model model) {
         model.addAttribute("titulo", "Editar Comic");
 
         return "comic/editar";
     }
 
-    @GetMapping("borrar")
+    @GetMapping("/borrar")
     public String borrar(Model model) {
         model.addAttribute("titulo", "Eliminar Comic");
 
