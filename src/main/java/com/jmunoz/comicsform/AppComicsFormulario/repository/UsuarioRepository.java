@@ -4,10 +4,8 @@ import com.jmunoz.comicsform.AppComicsFormulario.config.ConexionBaseDatos;
 import com.jmunoz.comicsform.AppComicsFormulario.models.domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,12 +18,30 @@ public class UsuarioRepository implements Repository<Usuario> {
 
     @Override
     public List<Usuario> findAll() throws SQLException {
-        return null;
+        conn = conexionBaseDatos.getConnection();
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try (Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios")) {
+
+            while (rs.next()) {
+                usuarios.add(crearUsuario(rs));
+            }
+        }
+
+        return usuarios;
     }
 
     @Override
     public List<Usuario> findAllByUserId(Long id) throws SQLException {
-        return null;
+        List<Usuario> usuarios = new ArrayList<>();
+        Usuario usuario = findById(id);
+
+        if (usuario != null) {
+            usuarios.add(usuario);
+        }
+
+        return usuarios;
     }
 
     @Override
@@ -74,17 +90,46 @@ public class UsuarioRepository implements Repository<Usuario> {
 
     @Override
     public Usuario save(Usuario usuario) throws SQLException {
-        return null;
+        conn = conexionBaseDatos.getConnection();
+        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO usuarios (username, password, email)" +
+                " VALUES(?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, usuario.getUsername());
+            stmt.setString(2, usuario.getPassword());
+            stmt.setString(3, usuario.getEmail());
+
+            stmt.executeUpdate();
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    usuario.setId(rs.getLong(1));
+                }
+            }
+        }
+
+        return usuario;
     }
 
     @Override
     public Usuario update(Usuario usuario) throws SQLException {
-        return null;
+        conn = conexionBaseDatos.getConnection();
+        try (PreparedStatement stmt = conn.prepareStatement("UPDATE usuarios SET username = ?, password = ?, email = ? WHERE id = ?")) {
+            stmt.setString(1, usuario.getUsername());
+            stmt.setString(2, usuario.getPassword());
+            stmt.setString(3, usuario.getEmail());
+            stmt.setLong(4, usuario.getId());
+
+            stmt.executeUpdate();
+        }
+
+        return usuario;
     }
 
     @Override
-    public void delete(Integer id) throws SQLException {
-
+    public void delete(Long id) throws SQLException {
+        conn = conexionBaseDatos.getConnection();
+        try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM usuarios WHERE id = ?")) {
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+        }
     }
 
     private Usuario crearUsuario(ResultSet rs) throws SQLException {

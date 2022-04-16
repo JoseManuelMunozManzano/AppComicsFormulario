@@ -34,7 +34,7 @@ public class TematicaServiceImpl implements TematicaService {
     }
 
     @Override
-    public void deleteTematica(Integer id) throws SQLException {
+    public void deleteTematica(Long id) throws SQLException {
         repository.delete(id);
     }
 }

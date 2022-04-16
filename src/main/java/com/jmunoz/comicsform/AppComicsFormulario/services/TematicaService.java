@@ -9,5 +9,5 @@ public interface TematicaService {
     List<Tematica> getTematicas() throws SQLException;
     Tematica findComicsByTematica(Long id) throws SQLException;
     Tematica saveTematica(Tematica tematica) throws SQLException;
-    void deleteTematica(Integer id) throws SQLException;
+    void deleteTematica(Long id) throws SQLException;
 }

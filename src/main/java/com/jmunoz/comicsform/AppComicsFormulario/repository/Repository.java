@@ -11,5 +11,5 @@ public interface Repository<T> {
     T findByField(Map<String, String> fieldValue) throws SQLException;
     T save(T t) throws SQLException;
     T update(T t) throws SQLException;
-    void delete(Integer id) throws SQLException;
+    void delete(Long id) throws SQLException;
 }

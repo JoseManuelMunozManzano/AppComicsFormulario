@@ -36,7 +36,7 @@ public class ComicServiceImpl implements ComicService {
     }
 
     @Override
-    public void deleteComic(Integer id) throws SQLException {
+    public void deleteComic(Long id) throws SQLException {
         repository.delete(id);
     }
 }

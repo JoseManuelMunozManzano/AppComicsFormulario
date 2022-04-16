@@ -10,5 +10,5 @@ public interface ComicService {
     Comic findComicById(Long id) throws SQLException;
     Comic saveComic(Comic comic) throws SQLException;
     Comic updateComic(Comic comic) throws SQLException;
-    void deleteComic(Integer id) throws SQLException;
+    void deleteComic(Long id) throws SQLException;
 }

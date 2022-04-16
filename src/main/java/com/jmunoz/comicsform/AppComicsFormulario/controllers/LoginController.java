@@ -1,6 +1,7 @@
 package com.jmunoz.comicsform.AppComicsFormulario.controllers;
 
 import com.jmunoz.comicsform.AppComicsFormulario.models.domain.Usuario;
+import com.jmunoz.comicsform.AppComicsFormulario.services.UsuarioService;
 import com.jmunoz.comicsform.AppComicsFormulario.validation.UsuarioLoginValidador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class LoginController {
 
     @Autowired
     private UsuarioLoginValidador validador;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -57,7 +61,9 @@ public class LoginController {
             return "login";
         }
 
-        redirectAttributes.addFlashAttribute("usuario", usuario);
+        Usuario usuarioBD = usuarioService.findUsuarioByUsername(usuario.getUsername());
+
+        redirectAttributes.addAttribute("idUsuario", usuarioBD.getId());
         return "redirect:/comic";
     }
 }

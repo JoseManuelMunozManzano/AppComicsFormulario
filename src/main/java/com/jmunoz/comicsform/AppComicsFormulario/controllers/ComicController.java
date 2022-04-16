@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.SQLException;
@@ -25,10 +24,11 @@ public class ComicController {
     private UsuarioService usuarioService;
 
     @GetMapping("")
-    public String ver(Model model, @ModelAttribute Usuario usuario) throws SQLException {
-        model.addAttribute("titulo", "COMICS DE " + usuario.getUsername().toUpperCase());
+    public String ver(Model model, String idUsuario) throws SQLException {
+        Usuario usuarioBD = usuarioService.findUserById(Long.parseLong(idUsuario));
 
-        Usuario usuarioBD = usuarioService.findUsuarioByUsername(usuario.getUsername());
+        model.addAttribute("titulo", "COMICS DE " + usuarioBD.getUsername().toUpperCase());
+
         List<Comic> comics = comicService.findComicsByUserId(usuarioBD.getId());
 
         model.addAttribute("comics", comics);

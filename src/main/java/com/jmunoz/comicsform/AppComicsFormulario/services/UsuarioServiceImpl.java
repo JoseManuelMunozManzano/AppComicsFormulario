@@ -16,6 +16,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     private Repository<Usuario> repository;
 
     @Override
+    public Usuario findUserById(Long id) throws SQLException {
+        return repository.findById(id);
+    }
+
+    @Override
     public Usuario findUsuarioByUsername(String username) throws SQLException {
         Map<String, String> fieldValueUsername = Map.of("username", username);
         return repository.findByField(fieldValueUsername);
