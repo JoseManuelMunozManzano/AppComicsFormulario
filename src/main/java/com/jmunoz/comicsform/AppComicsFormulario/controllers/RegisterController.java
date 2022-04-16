@@ -39,19 +39,19 @@ public class RegisterController {
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
 
-        return "register";
+        return "user/register";
     }
 
     @PostMapping({"/", ""})
     public String register(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws SQLException {
         if (result.hasErrors()) {
             model.addAttribute("titulo", "ALTA DE USUARIO");
-            return "register";
+            return "user/register";
         }
 
         Usuario usuarioBD = usuarioService.saveUsuario(usuario);
 
         redirectAttributes.addAttribute("idUsuario", usuarioBD.getId());
-        return "redirect:/comic";
+        return "redirect:/comic/comic";
     }
 }

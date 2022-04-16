@@ -41,7 +41,7 @@ public class LoginController {
         Usuario usuario = new Usuario();
         model.addAttribute("usuario", usuario);
 
-        return "login";
+        return "user/login";
     }
 
     @PostMapping({"/", ""})
@@ -58,7 +58,7 @@ public class LoginController {
         if (!errores.isEmpty()) {
             model.addAttribute("error", errores);
             model.addAttribute("titulo", "LOGIN");
-            return "login";
+            return "user/login";
         }
 
         Usuario usuarioBD = usuarioService.findUsuarioByUsername(usuario.getUsername());

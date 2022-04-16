@@ -33,6 +33,27 @@ public class ComicController {
 
         model.addAttribute("comics", comics);
         model.addAttribute("usuario", usuarioBD);
-        return "comic";
+        return "comic/comic";
+    }
+
+    @GetMapping("alta")
+    public String alta(Model model) {
+        model.addAttribute("titulo", "Alta de Comic");
+
+        return "comic/alta";
+    }
+
+    @GetMapping("editar")
+    public String editar(Model model) {
+        model.addAttribute("titulo", "Editar Comic");
+
+        return "comic/editar";
+    }
+
+    @GetMapping("borrar")
+    public String borrar(Model model) {
+        model.addAttribute("titulo", "Eliminar Comic");
+
+        return "comic/borrar";
     }
 }
