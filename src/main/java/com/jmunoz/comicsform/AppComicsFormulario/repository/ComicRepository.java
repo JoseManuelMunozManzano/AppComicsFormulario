@@ -49,7 +49,7 @@ public class ComicRepository implements Repository<Comic> {
             stmt.setLong(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
+                while (rs.next()) {
                     comics.add(crearComic(rs));
                 }
             }
@@ -110,7 +110,7 @@ public class ComicRepository implements Repository<Comic> {
     public Comic save(Comic comic) throws SQLException {
         conn = conexionBaseDatos.getConnection();
 
-        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO comics (nombre, precio, fecha_registro, tematica_id, usuario)_id) " +
+        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO comics (nombre, precio, fecha_registro, tematica_id, usuario_id) " +
                 "VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, comic.getNombre());
             stmt.setFloat(2, comic.getPrecio());

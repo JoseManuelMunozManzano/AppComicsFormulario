@@ -1,12 +1,24 @@
 package com.jmunoz.comicsform.AppComicsFormulario.models.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 public class Comic {
     private Long id;
+    @NotBlank
+    @Size(min=3, max=45)
     private String nombre;
+    @NotNull
+    @Min(0)
     private Float precio;
+    @NotNull
+    @Past
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fechaRegistro;
+    @NotNull
     private Tematica tematica;
     private Usuario usuario;
 

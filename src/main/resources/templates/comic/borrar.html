@@ -9,5 +9,42 @@
 </head>
 <body>
     <h1 th:text="${titulo}"></h1>
+
+    <form th:action="@{/comic/borrar/} + ${comic.getId()}" method="post" th:object="${comic}">
+        <div>
+            <label for="nombre">Nombre</label>
+            <div>
+                <input type="text" id="nombre" th:field="*{nombre}" disabled>
+            </div>
+        </div>
+
+        <div>
+            <label for="precio">Precio</label>
+            <div>
+                <input type="text" id="precio" th:field="*{precio}" disabled>
+            </div>
+        </div>
+
+        <div>
+            <label for="fechaRegistro">Fecha de Compra</label>
+            <div>
+                <input type="date" id="fechaRegistro" th:field="*{fechaRegistro}" disabled>
+            </div>
+        </div>
+
+        <div>
+            <label for="tematica">Temática</label>
+            <div>
+                <div>
+                    <input type="text" id="tematica" th:field="*{tematica.nombre}" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Aceptar">
+            <a th:href="@{/comic/}"><input type="button" value="Cancelar"></a>
+        </div>
+    </form>
 </body>
 </html>

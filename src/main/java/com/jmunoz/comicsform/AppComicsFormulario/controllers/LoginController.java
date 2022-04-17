@@ -1,6 +1,7 @@
 package com.jmunoz.comicsform.AppComicsFormulario.controllers;
 
 import com.jmunoz.comicsform.AppComicsFormulario.models.domain.Usuario;
+import com.jmunoz.comicsform.AppComicsFormulario.models.domain.UsuarioSeleccionado;
 import com.jmunoz.comicsform.AppComicsFormulario.services.UsuarioService;
 import com.jmunoz.comicsform.AppComicsFormulario.validation.UsuarioLoginValidador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.sql.SQLException;
@@ -28,6 +28,9 @@ public class LoginController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private UsuarioSeleccionado usuarioSeleccionado;
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
@@ -45,7 +48,7 @@ public class LoginController {
     }
 
     @PostMapping({"/", ""})
-    public String login(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes redirectAttributes) throws SQLException {
+    public String login(@Valid Usuario usuario, BindingResult result, Model model) throws SQLException {
         Map<String, String> errores = new HashMap<>();
         if (result.hasErrors()) {
             result.getFieldErrors().forEach(err -> {
@@ -62,8 +65,8 @@ public class LoginController {
         }
 
         Usuario usuarioBD = usuarioService.findUsuarioByUsername(usuario.getUsername());
+        usuarioSeleccionado.setId(usuarioBD.getId());
 
-        redirectAttributes.addAttribute("idUsuario", usuarioBD.getId());
         return "redirect:/comic";
     }
 }
